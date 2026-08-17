@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Líder Muebles — Mueblería en Curuguaty</title>
+<meta name="description" content="Living, dormitorio, comedor, cocina, oficina, exterior, colchones y decoración en Curuguaty. Consultá por WhatsApp.">
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar">
+  <div class="container">
+    <a href="#inicio" class="brand">
+      <img src="img/logo-mark.svg" alt="Logo Líder Muebles">
+      <span class="brand-name">
+        <span data-brand-name>Líder Muebles</span>
+        <small data-brand-tag>Mueblería en Curuguaty</small>
+      </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a class="btn btn-whatsapp btn-sm" id="navWaBtn" href="https://wa.me/595981234567" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.44 1.32 4.93L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.83 14.06c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.14-.98-.32-1.68-.63-2.96-1.28-4.9-4.26-5.04-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.46.77-2.17 1.04-2.47.27-.3.6-.37.8-.37h.57c.18 0 .43-.03.66.5.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.32.38-.45.5-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.19 1.06 2.19 1.39 2.5 1.55.31.15.5.13.68-.06.2-.2.79-.9.99-1.21.2-.31.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.49.22.56.35.08.13.08.72-.17 1.42Z"/></svg>
+        WhatsApp
+      </a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="inicio">
+  <div class="container">
+    <span class="hero-tag"><span class="dot"></span> <span id="heroTagText">Mueblería de barrio en Curuguaty</span></span>
+    <h1 id="heroTitle">Muebles pensados para <em>tu día a día</em></h1>
+    <p class="lead" id="heroLead">En Líder Muebles de Curuguaty encontrás living, dormitorio, comedor, cocina, oficina, exterior, colchones y decoración.</p>
+
+    <div class="search-block">
+      <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Buscá un sofá, escritorio, colchón...">
+        <button id="searchBtn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <div class="search-pills">
+        <label class="pill-select">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.24L4 3a1 1 0 0 0-1 1l.24 5.59a2 2 0 0 0 .59 1.41l9.58 9.58a2 2 0 0 0 2.83 0l4.35-4.35a2 2 0 0 0 0-2.82Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+          <select id="categorySelect" aria-label="Categoría"></select>
+        </label>
+        <label class="pill-select">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+          <select id="sortSelect" aria-label="Ordenar por">
+            <option value="relevancia">Ordenar por: Relevancia</option>
+            <option value="menor">Precio: menor a mayor</option>
+            <option value="mayor">Precio: mayor a menor</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="chip-row" id="categoryChips"></div>
+  </div>
+</header>
+
+<!-- ===================== CATÁLOGO ===================== -->
+<section class="section" id="catalogo">
+  <div class="container">
+    <div class="featured" id="featuredPanel"></div>
+
+    <div class="catalog-tabs">
+      <button class="tab-btn is-active" data-tab="todos">Todos</button>
+      <button class="tab-btn" data-tab="destacados">Destacados</button>
+      <button class="tab-btn" data-tab="ofertas">Ofertas</button>
+      <button class="tab-btn" data-tab="nuevos">Nuevos</button>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== SERVICIOS ===================== -->
+<section class="section section--alt" id="servicios">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-kicker">Nuestros servicios</span>
+      <h2>Más que muebles, una solución completa</h2>
+      <p>Te acompañamos desde que elegís el mueble hasta que queda instalado en su lugar.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== SOBRE NOSOTROS ===================== -->
+<section class="section" id="nosotros">
+  <div class="container about">
+    <div class="about-media reveal">
+      <img src="img/living-sofa.svg" alt="Local de Líder Muebles">
+      <div class="about-tag-float workshop-tag">
+        <div class="workshop-tag-head">Ficha del local</div>
+        <div class="workshop-tag-grid">
+          <div class="workshop-tag-item"><span>Ubicación</span><strong>Curuguaty</strong></div>
+          <div class="workshop-tag-item"><span>Desde</span><strong>2014</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-copy reveal">
+      <span class="section-kicker">Sobre nosotros</span>
+      <h2>Un local de barrio que conoce lo que necesitás</h2>
+      <p id="aboutIntroText">Somos un negocio familiar de Curuguaty. No vendemos catálogo por catálogo: te ayudamos a elegir el mueble que realmente entra en tu casa y aguanta el uso de todos los días.</p>
+      <div class="about-features" id="aboutFeatures"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA WHATSAPP ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h3>¿No encontrás lo que buscás?</h3>
+        <p>Contanos qué necesitás y te ayudamos a encontrarlo, aunque no esté en la página.</p>
+      </div>
+      <a class="btn btn-whatsapp" href="https://wa.me/595981234567" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.44 1.32 4.93L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.83 14.06c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.14-.98-.32-1.68-.63-2.96-1.28-4.9-4.26-5.04-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.46.77-2.17 1.04-2.47.27-.3.6-.37.8-.37h.57c.18 0 .43-.03.66.5.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.32.38-.45.5-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.19 1.06 2.19 1.39 2.5 1.55.31.15.5.13.68-.06.2-.2.79-.9.99-1.21.2-.31.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.49.22.56.35.08.13.08.72-.17 1.42Z"/></svg>
+        Escribinos ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACTO ===================== -->
+<section class="section section--alt" id="contacto">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-kicker">Contacto</span>
+      <h2>Hablemos de tu próximo mueble</h2>
+      <p>Escribinos por WhatsApp, mandanos un mensaje o visitanos en el local.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.44 1.32 4.93L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.83 14.06c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.14-.98-.32-1.68-.63-2.96-1.28-4.9-4.26-5.04-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.46.77-2.17 1.04-2.47.27-.3.6-.37.8-.37h.57c.18 0 .43-.03.66.5.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.32.38-.45.5-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.19 1.06 2.19 1.39 2.5 1.55.31.15.5.13.68-.06.2-.2.79-.9.99-1.21.2-.31.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.49.22.56.35.08.13.08.72-.17 1.42Z"/></svg>
+          </div>
+          <div>
+            <h4>WhatsApp</h4>
+            <a id="contactWa" href="#" target="_blank" rel="noopener">+595 981 234 567</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <a id="contactEmail" href="#">contacto@lidermueblescuruguaty.com.py</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4>Ubicación</h4>
+            <p id="contactAddress">Sobre Ruta VII, Curuguaty, Canindeyú</p>
+            <a id="contactMapLink" href="#" target="_blank" rel="noopener" style="font-weight:600;color:var(--sage-dark)">Ver en el mapa →</a>
+          </div>
+        </div>
+        <div class="contact-socials">
+          <a class="social-btn" data-social-ig href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </a>
+          <a class="social-btn" data-social-fb href="#" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="fNombre">Nombre</label>
+            <input id="fNombre" name="nombre" type="text" required placeholder="Tu nombre">
+          </div>
+          <div class="field">
+            <label for="fTelefono">Teléfono</label>
+            <input id="fTelefono" name="telefono" type="tel" required placeholder="09xx xxx xxx">
+          </div>
+        </div>
+        <div class="field">
+          <label for="fMensaje">Mensaje</label>
+          <textarea id="fMensaje" name="mensaje" required placeholder="Contanos qué mueble estás buscando..."></textarea>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Enviar por WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-kicker">Preguntas frecuentes</span>
+      <h2>Todo lo que necesitás saber</h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="img/logo-mark.svg" alt="Logo Líder Muebles">
+          <span data-brand-name>Líder Muebles</span>
+        </div>
+        <p>Mueblería de barrio en Curuguaty. Living, dormitorio, comedor, cocina, oficina, exterior, colchones y decoración.</p>
+        <div class="footer-socials">
+          <a data-social-ig href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </a>
+          <a data-social-fb href="#" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li id="footerWa">+595 981 234 567</li>
+          <li id="footerEmail">contacto@lidermueblescuruguaty.com.py</li>
+          <li id="footerAddress">Sobre Ruta VII, Curuguaty, Canindeyú</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Líder Muebles — Curuguaty, Paraguay</span>
+      <a class="admin-link" href="admin.html">• Admin</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== MODAL PRODUCTO ===================== -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-body">
+      <div class="carousel">
+        <div class="carousel-track" id="carouselTrack"></div>
+        <button class="carousel-arrow prev" id="carouselPrev">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-arrow next" id="carouselNext">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+      <div class="modal-info">
+        <span class="product-cat" id="modalCat"></span>
+        <h2 id="modalName"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-price">
+          <span class="now" id="modalPriceNow"></span>
+          <span class="before" id="modalPriceBefore"></span>
+        </div>
+        <span class="usd" id="modalPriceUsd"></span>
+
+        <div class="workshop-tag">
+          <div class="workshop-tag-head">Ficha técnica</div>
+          <div class="workshop-tag-grid" id="modalSpecs"></div>
+        </div>
+
+        <div class="modal-actions">
+          <a class="btn btn-whatsapp" id="modalWaBtn" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.44 1.32 4.93L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.83 14.06c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.14-.98-.32-1.68-.63-2.96-1.28-4.9-4.26-5.04-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.46.77-2.17 1.04-2.47.27-.3.6-.37.8-.37h.57c.18 0 .43-.03.66.5.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.32.38-.45.5-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.19 1.06 2.19 1.39 2.5 1.55.31.15.5.13.68-.06.2-.2.79-.9.99-1.21.2-.31.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.49.22.56.35.08.13.08.72-.17 1.42Z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="modal-share-note" id="modalShareNote">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg>
+      Alguien te compartió este producto
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="lightboxImg" src="" alt="Zoom del producto">
+  <span class="lightbox-hint">Doble toque o pellizcá para hacer zoom</span>
+</div>
+
+<!-- ===================== FLOTANTES ===================== -->
+<div class="chat-bubble" id="chatBubble">
+  <button class="chat-bubble-close" id="chatBubbleClose">✕</button>
+  <p>¡Hola! 👋 ¿Buscás algo en particular? Escribinos y te ayudamos.</p>
+  <a class="btn btn-whatsapp btn-sm" href="https://wa.me/595981234567" target="_blank" rel="noopener">Chatear ahora</a>
+</div>
+<a class="float-wa" href="https://wa.me/595981234567" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.44 1.32 4.93L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.83 14.06c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.14-.98-.32-1.68-.63-2.96-1.28-4.9-4.26-5.04-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.46.77-2.17 1.04-2.47.27-.3.6-.37.8-.37h.57c.18 0 .43-.03.66.5.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.32.38-.45.5-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.19 1.06 2.19 1.39 2.5 1.55.31.15.5.13.68-.06.2-.2.79-.9.99-1.21.2-.31.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.49.22.56.35.08.13.08.72-.17 1.42Z"/></svg>
+</a>
+
+<!-- ===================== COOKIES ===================== -->
+<div class="cookie-banner" id="cookieBanner">
+  <p>Usamos cookies para mejorar tu experiencia en el sitio. Al seguir navegando, aceptás su uso.</p>
+  <button class="btn btn-primary btn-sm" id="cookieAccept">Entendido</button>
+</div>
+
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

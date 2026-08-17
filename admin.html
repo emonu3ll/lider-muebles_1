@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de administración — Líder Muebles</title>
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+<div class="toast-stack" id="toastStack"></div>
+
+<!-- ===================== LOGIN ===================== -->
+<div class="admin-login" id="loginScreen">
+  <div class="admin-login-card">
+    <div class="admin-login-brand">
+      <img src="img/logo-mark.svg" alt="Logo Líder Muebles">
+      <span>Líder Muebles</span>
+    </div>
+    <h1>Panel de administración</h1>
+    <p>Ingresá con tu correo y contraseña para gestionar el catálogo.</p>
+    <form id="loginForm" style="display:flex; flex-direction:column; gap:14px;">
+      <div class="field">
+        <label for="loginEmail">Correo</label>
+        <input id="loginEmail" type="email" required placeholder="tu@correo.com">
+      </div>
+      <div class="field">
+        <label for="loginPassword">Contraseña</label>
+        <input id="loginPassword" type="password" required placeholder="••••••••">
+      </div>
+      <span class="field-error" id="loginError">Completá correo y contraseña para ingresar.</span>
+      <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+    </form>
+    <div class="admin-login-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span>Modo demo: cualquier correo y contraseña completos te dejan entrar. Cuando conectemos Firebase, esto pasa a ser un login real.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div class="admin-shell hidden" id="adminApp">
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-brand">
+      <img src="img/logo-mark.svg" alt="Logo">
+      <span>Líder Muebles</span>
+    </div>
+    <button class="admin-nav-item is-active" data-section="productos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Productos
+    </button>
+    <button class="admin-nav-item" data-section="servicios">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      Servicios
+    </button>
+    <button class="admin-nav-item" data-section="faq">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 1 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>
+      Preguntas frecuentes
+    </button>
+    <button class="admin-nav-item" data-section="nosotros">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+      Sobre nosotros
+    </button>
+    <button class="admin-nav-item" data-section="contacto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Contacto y redes
+    </button>
+    <button class="admin-nav-item" data-section="portada">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      Portada
+    </button>
+    <div class="admin-sidebar-footer">
+     <a href="index.html">↗ Ver sitio público</a>
+      <button id="logoutBtn" style="text-align:left;">⎋ Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="nav-toggle" id="adminNavToggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+        <h2 id="topbarTitle">Productos</h2>
+      </div>
+      <div class="admin-topbar-actions">
+        <span class="admin-demo-note" style="color:var(--copper-dark); font-weight:600;">● Modo demo: los cambios no se guardan al recargar</span>
+        <span id="topbarUser"></span>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- PRODUCTOS -->
+      <section class="admin-section is-active" id="section-productos">
+        <div class="admin-toolbar">
+          <label class="field admin-search" style="margin:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="productSearch" type="text" placeholder="Buscar producto...">
+          </label>
+          <button class="btn btn-primary" id="btnNewProduct">+ Nuevo producto</button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Badge</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SERVICIOS -->
+      <section class="admin-section" id="section-servicios">
+        <div class="admin-toolbar">
+          <div></div>
+          <button class="btn btn-primary" id="btnNewService">+ Nuevo servicio</button>
+        </div>
+        <div id="servicesList"></div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="admin-section" id="section-faq">
+        <div class="admin-toolbar">
+          <div></div>
+          <button class="btn btn-primary" id="btnNewFaq">+ Nueva pregunta</button>
+        </div>
+        <div id="faqAdminList"></div>
+      </section>
+
+      <!-- SOBRE NOSOTROS -->
+      <section class="admin-section" id="section-nosotros">
+        <div class="admin-table-wrap" style="padding:24px; display:flex; flex-direction:column; gap:18px;">
+          <div class="field">
+            <label for="aboutIntro">Texto de introducción</label>
+            <textarea id="aboutIntro"></textarea>
+          </div>
+          <span class="form-section-title">4 puntos destacados</span>
+          <div class="feature-edit-grid" id="featureEditGrid"></div>
+          <button class="btn btn-primary" id="btnSaveAbout" style="align-self:flex-start;">Guardar cambios</button>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section class="admin-section" id="section-contacto">
+        <div class="admin-table-wrap" style="padding:24px; display:flex; flex-direction:column; gap:16px; max-width:560px;">
+          <div class="field"><label for="cfWhatsapp">WhatsApp (con código de país, solo números)</label><input id="cfWhatsapp" placeholder="595981234567"></div>
+          <div class="field"><label for="cfEmail">Email</label><input id="cfEmail" type="email"></div>
+          <div class="field"><label for="cfAddress">Dirección</label><input id="cfAddress"></div>
+          <div class="field"><label for="cfInstagram">Instagram (link)</label><input id="cfInstagram"></div>
+          <div class="field"><label for="cfFacebook">Facebook (link)</label><input id="cfFacebook"></div>
+          <button class="btn btn-primary" id="btnSaveContact" style="align-self:flex-start;">Guardar cambios</button>
+        </div>
+      </section>
+
+      <!-- PORTADA -->
+      <section class="admin-section" id="section-portada">
+        <div class="admin-table-wrap" style="padding:24px; display:flex; flex-direction:column; gap:16px; max-width:640px;">
+          <div class="field"><label for="hfTag">Etiqueta chica (arriba del título)</label><input id="hfTag"></div>
+          <div class="field">
+            <label for="hfTitle">Título principal</label>
+            <input id="hfTitle">
+            <span class="field-hint">Podés envolver una parte en &lt;em&gt;...&lt;/em&gt; para resaltarla en verde, como "tu día a &lt;em&gt;día&lt;/em&gt;".</span>
+          </div>
+          <div class="field"><label for="hfLead">Texto debajo del título</label><textarea id="hfLead"></textarea></div>
+          <button class="btn btn-primary" id="btnSaveHero" style="align-self:flex-start;">Guardar cambios</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DRAWER: PRODUCTO ===================== -->
+<div class="drawer-overlay" id="productDrawer">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h3 id="productDrawerTitle">Nuevo producto</h3>
+      <button class="icon-btn" id="productDrawerClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <span class="form-section-title">Fotos</span>
+      <div class="dropzone" id="productDropzone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><strong>Arrastrá tus fotos</strong> acá, o hacé clic para elegirlas</p>
+      </div>
+      <input type="file" id="productPhotoInput" accept="image/*" multiple class="hidden">
+      <div class="photo-grid" id="productPhotoGrid"></div>
+
+      <span class="form-section-title">Datos generales</span>
+      <div class="field"><label for="pfNombre">Nombre del producto</label><input id="pfNombre" placeholder="Ej: Sofá 3 cuerpos Bosque"></div>
+      <div class="form-row">
+        <div class="field"><label for="pfCategoria">Categoría</label><select id="pfCategoria"></select></div>
+        <div class="field"><label for="pfSku">SKU (opcional)</label><input id="pfSku" placeholder="Se autogenera si lo dejás vacío"></div>
+      </div>
+      <div class="field"><label for="pfDescripcion">Descripción</label><textarea id="pfDescripcion"></textarea></div>
+
+      <span class="form-section-title">Precio y stock</span>
+      <div class="form-row">
+        <div class="field"><label for="pfPrecioGs">Precio en guaraníes</label><input id="pfPrecioGs" type="number" min="0" step="1000" placeholder="0"></div>
+        <div class="field"><label for="pfPrecioAnterior">Precio anterior (si hay oferta)</label><input id="pfPrecioAnterior" type="number" min="0" step="1000" placeholder="Opcional"></div>
+      </div>
+      <div class="price-preview" id="pricePreview">≈ USD 0</div>
+      <div class="form-row">
+        <div class="field"><label for="pfStock">Estado de stock</label>
+          <select id="pfStock">
+            <option value="Disponible">Disponible</option>
+            <option value="Últimas unidades">Últimas unidades</option>
+            <option value="A pedido">A pedido</option>
+            <option value="Agotado">Agotado</option>
+          </select>
+        </div>
+        <div class="field"><label>Badge</label>
+          <div class="checkbox-row" style="padding-top:6px;">
+            <label class="checkbox-pill"><input type="checkbox" id="pfBadgeOferta"> Oferta</label>
+            <label class="checkbox-pill"><input type="checkbox" id="pfBadgeNuevo"> Nuevo</label>
+            <label class="checkbox-pill"><input type="checkbox" id="pfBadgeDestacado"> Destacado</label>
+          </div>
+        </div>
+      </div>
+
+      <span class="form-section-title">Ficha técnica</span>
+      <div class="form-row">
+        <div class="field"><label for="pfMedidas">Medidas</label><input id="pfMedidas" placeholder="Ej: 210 x 90 x 85 cm"></div>
+        <div class="field"><label for="pfMaterial">Material</label><input id="pfMaterial" placeholder="Ej: Madera de pino"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="pfTerminacion">Terminación / color</label><input id="pfTerminacion"></div>
+        <div class="field"><label for="pfGarantia">Garantía</label><input id="pfGarantia" placeholder="Ej: 12 meses"></div>
+      </div>
+
+      <span class="form-section-title">Datos del proveedor</span>
+      <div class="provider-box">
+        <span class="field-hint-privacy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Privado — nunca se muestra en el sitio público
+        </span>
+        <div class="form-row">
+          <div class="field" style="margin:0;"><label for="pfProveedorNombre">Proveedor</label><input id="pfProveedorNombre"></div>
+          <div class="field" style="margin:0;"><label for="pfProveedorTelefono">Teléfono</label><input id="pfProveedorTelefono"></div>
+        </div>
+        <div class="field" style="margin:0;"><label for="pfProveedorCosto">Costo de compra (Gs.)</label><input id="pfProveedorCosto" type="number" min="0"></div>
+      </div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn btn-outline" id="productDrawerCancel">Cancelar</button>
+      <button class="btn btn-primary" id="productDrawerSave">Guardar producto</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DRAWER: SERVICIO ===================== -->
+<div class="drawer-overlay" id="serviceDrawer">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h3 id="serviceDrawerTitle">Nuevo servicio</h3>
+      <button class="icon-btn" id="serviceDrawerClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <span class="form-section-title">Foto</span>
+      <div class="dropzone" id="serviceDropzone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p><strong>Arrastrá una foto</strong> acá, o hacé clic para elegirla</p>
+      </div>
+      <input type="file" id="servicePhotoInput" accept="image/*" class="hidden">
+      <div class="photo-grid" id="servicePhotoGrid"></div>
+
+      <div class="field"><label for="sfTitulo">Título</label><input id="sfTitulo"></div>
+      <div class="field"><label for="sfDescripcion">Descripción</label><textarea id="sfDescripcion"></textarea></div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn btn-outline" id="serviceDrawerCancel">Cancelar</button>
+      <button class="btn btn-primary" id="serviceDrawerSave">Guardar servicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DRAWER: FAQ ===================== -->
+<div class="drawer-overlay" id="faqDrawer">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h3 id="faqDrawerTitle">Nueva pregunta</h3>
+      <button class="icon-btn" id="faqDrawerClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="field"><label for="ffPregunta">Pregunta</label><input id="ffPregunta"></div>
+      <div class="field"><label for="ffRespuesta">Respuesta</label><textarea id="ffRespuesta"></textarea></div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn btn-outline" id="faqDrawerCancel">Cancelar</button>
+      <button class="btn btn-primary" id="faqDrawerSave">Guardar pregunta</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL DE RECORTE ===================== -->
+<div class="modal-overlay" id="cropModal">
+  <div class="modal" style="max-width:520px;">
+    <div class="crop-modal-body">
+      <div class="crop-stage" id="cropStage">
+        <img id="cropImg" src="" alt="Imagen a recortar">
+        <div class="crop-frame" id="cropFrame">
+          <span class="crop-handle nw"></span>
+          <span class="crop-handle ne"></span>
+          <span class="crop-handle sw"></span>
+          <span class="crop-handle se"></span>
+        </div>
+      </div>
+      <p class="crop-hint">Arrastrá el recuadro para mover, y las esquinas para cambiar el tamaño.</p>
+      <div class="crop-actions">
+        <button class="btn btn-outline" id="cropCancel">Cancelar</button>
+        <button class="btn btn-primary" id="cropApply">Aplicar recorte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL DE CONFIRMACIÓN ===================== -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal confirm-modal">
+    <div class="confirm-modal-icon" id="confirmIcon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <h3 id="confirmTitle">¿Confirmar acción?</h3>
+    <p id="confirmText">Esta acción no se puede deshacer.</p>
+    <div class="confirm-modal-actions">
+      <button class="btn btn-outline" id="confirmCancel">Cancelar</button>
+      <button class="btn btn-primary" id="confirmOk">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

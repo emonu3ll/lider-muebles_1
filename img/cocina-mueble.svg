@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect x="0" y="0" width="400" height="300" rx="18" fill="#EAE1D2"/>
+  
+  <g stroke="#2B2118" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="60" y="150" width="280" height="18" fill="#2B2118" opacity="0.85"/>
+    <rect x="60" y="168" width="280" height="70" fill="#B8763E"/>
+    <path d="M150 168 V238 M240 168 V238" stroke="#8A5A2C" stroke-width="2"/>
+    <circle cx="105" cy="203" r="6" fill="#FBF7EF" stroke-width="1.4"/>
+    <circle cx="195" cy="203" r="6" fill="#FBF7EF" stroke-width="1.4"/>
+    <circle cx="285" cy="203" r="6" fill="#FBF7EF" stroke-width="1.4"/>
+    <rect x="70" y="90" width="90" height="46" rx="4" fill="#5C7256"/>
+    <rect x="240" y="90" width="90" height="46" rx="4" fill="#5C7256"/>
+    <circle cx="115" cy="113" r="4" fill="#FBF7EF"/>
+    <circle cx="285" cy="113" r="4" fill="#FBF7EF"/>
+  </g>
+
+  
+  <g transform="translate(316,20)" opacity="0.9">
+    <rect x="0" y="0" width="64" height="26" rx="3" fill="#FBF7EF" stroke="#2B2118" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <circle cx="10" cy="13" r="2" fill="none" stroke="#2B2118" stroke-width="1.2"/>
+  </g>
+</svg>
